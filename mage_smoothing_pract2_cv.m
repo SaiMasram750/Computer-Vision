@@ -1,0 +1,24 @@
+clear all;
+close all;
+clc;
+original_image = imread("C:\Program Files\MATLAB\R2024b\toolbox\images\imdata\tape.png");
+gray_img = rgb2gray(original_image );
+original_image_double = im2double(gray_img );
+averaging_filter = ones(3, 3) / 9;
+smoothed_avg = imfilter(original_image_double, averaging_filter, 'replicate');
+gaussian_filter = fspecial('gaussian', [5 5], 1.9);
+smoothed_gauss = imfilter(original_image_double, gaussian_filter, 'replicate');
+figure;
+subplot(1,4,1);
+imshow(original_image);
+title('Original Image');
+subplot(1,4,2);
+imshow( gray_img);
+title('Gray Image');
+subplot(1,4,3);
+imshow(smoothed_avg);
+title('Averaging Filter');
+subplot(1,4,4);
+imshow(smoothed_gauss);
+title('Gaussian Filter');
+
